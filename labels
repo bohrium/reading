@@ -1,0 +1,172 @@
+LABELS 
+
+  senses    --- exploring and refining taste, hearing, etc
+  reveal    --- how to write / present / expose
+  homosx
+  civics
+  racism
+
+  whimsy
+  litera    --- literature
+
+  gnphil
+    entrop    --- entropy, information, communication: intersects cs, math, phys 
+    evolve    --- evolutionary biology
+    cogsci
+      decide    --- decision theory, economics
+
+  gncomp
+    mchlrn    --- artificial intelligence, machine learning, pattern recognition
+    algthm    --- algorithms and data structures
+    cplxty    --- computational complexity
+    prglng    --- type systems, programming languages
+
+  gnphys
+    sttmch  --- statistical mechanics, thermodynamics
+    qntmch  --- quantum mechanics, quantum field theory
+
+  gnmath
+    alggeo
+      number    --- number theory
+    difgeo
+    diftop
+    algtop
+      natmap    --- categories, functors, natural maps
+    dynami    --- dynamics, including diffeqs
+    combos    --- combinatorics
+    analys    --- mathematical analysis
+      spcfnc    --- special functions
+
+-------------------------------------------------------------------------------
+
+book    mchlrn                 abu-mostafa.2012.learning-from-data.pdf
+book    gnmath                 aigner.2009.book-proofs.pdf
+book    racism                 alexander.2010.new-jim-crow.pdf
+book           dynami          arnold.1968.ergodic-theorems-classical.pdf
+book    cplxty dynami analys   arnold.1978.ordinary-differential-equations.djvu
+book    gnmath                 arora.2009.computational-complexity.pdf
+book           spcfnc analys   artin.1964.gamma-function.djvu
+book    entrop                 arwini.2008.information-geometry-independence.djvu
+book           linalg alggeo   atiyah.1994.commutative-algebra.djvu
+book    racism                 baldwin.1984.notes-native-son.pdf
+book    prglng                 bentley.1988.more-programming-pearls.djvu
+book    prglng                 bird.2010.functional-algorithm-design.pdf
+book    cplxty                 bogdanov.2006.average-case-complexity.pdf
+book    algtop dynami          bott.1995.differential-forms-topology.djvu
+book    algtop                 bott.1995.forms-algebraic-topology.djvu
+book           spcfnc dynami   bowman.2010.bessel-functions.djvu
+book           linalg          carter.1995.lie-groups-algebras.djvu
+book           number whimsy   conway.1997.sensual-quadratic-form.djvu
+book    evolve        gnphil   dawkins.1999.extended-phenotype.pdf
+book           cogsci gnphil   dennett.2013.intuition-pumps.pdf
+book    prglng                 dijkstra.1976.displine-of-programming.djvu
+book    cplxty rndalg          dubhashi.2009.analysis-randomized-algorithms.pdf
+book    sttmch                 feynman.1981.statistical-mechanics.djvu
+book    gnphys dynami          feynman.1995.lectures-on-gravitation.djvu
+book    evolve                 frank.1998.foundations-social-evolution.pdf
+book    prglng                 gibbons.2000.calculating-functional-programs.pdf
+book    homosx                 goldstone.1999.gay-sex.pdf
+book           difgeo          gromov.1990.curvature-geometric-meaning.pdf
+book           linalg          halmos.1974.finite-vector-spaces.djvu
+book           linalg dynami   halmos.2006.ergodic-theory.djvu
+book    qntmch                 harris.1972.quantum-field-theory.pdf
+book           decide evolve   heinrich.1979.bumblebee-economics.pdf
+book    algtop                 hilton.1953.introduction-homotopy-theory.djvu
+book           cogsci          hofstadter.1996.fluid-concepts-analogies.djvu
+book    mchlrn evolve gnphil   holland.1992.adaptation-artificial-systems.djvu
+book           linalg          humphreys.1973.lie-algebra-representations.djvu
+book    homosx                 ibson.2002.photographing-male-relations.pdf
+book           cogsci decide   kahneman.1973.attention-and-effort.djvu
+book    prglng                 kaplan.2001.persistent-data-structures.ps
+book    racism                 kendi.2019.be-an-antiracist.pdf
+book    sttmch                 khinchin.1960.foundations-statistical-mechanics.djvu
+book    cplxty                 kitaev.2002.classical-quantum-computation.djvu
+book    gnmath reveal          knuth.1987.mathematical-writing.pdf
+book    cplxty                 kozen.2006.theory-computation.pdf
+book    prglng                 krishnamurthi.2017.programming-languages.pdf
+book    cplxty entrop          kushilevitz.1997.communication-complexity.djvu
+book    gnphys                 landau.1976.mechanics.djvu
+book    gnphys                 landau.1981.theory-of-elasticity.djvu
+book    sttmch                 lanford.1973.entropy-equiliibrium-states.pdf
+book                  senses   lester.1999.bach-solo-violin.pdf
+book    gncomp prglng          lipovaca.2011.learn-you-haskell.pdf
+book           civics decide   lutz.2006.principles-constitutional-design.pdf
+book    gnmath                 mahajan.2010.street-fighting-mathematics.pdf
+book    qntmch                 mandl.2984.quantum-field-theory.pdf
+book                  natmap   mclarty.1992.categories-and-topoi.djvu
+book                  decide   menezes.2008.auction-theory.pdf
+book    homosx                 miller.2014.bottom-porn-star.pdf
+book    homosx                 miller.2015.how-to-top.pdf
+book    algthm prglng cplxty   milner.1995.communication-and-concurrency.djvu
+book           diftop          milnor.1963.morse-theory.djvu
+book           diftop          milnor.1965.h-corbordism-theorem.djvu
+book           diftop          milnor.1965.topology-differentiable-viewpoint.djvu
+book           linalg number   milnor.1973.symmetric-bilinear-forms.djvu
+book    algtop diftop          milnor.1974.characteristic-classes.djvu
+book           linalg          morandi.1996.field-galois-theory.djvu
+book                  litera   nabokov.1982.pale-fire.pdf
+book           sttmch          naudts.2011.generalized-thermostatics.pdf
+book           linalg combos   nazarov.2007.representation-symmetric-group.pdf
+book    prglng algthm          okasaki.1998.functional-data-structures.djvu
+book                  senses   omae.1988.book-of-sushi.pdf
+book    gnmath whimsy senses   paulos.1982.logic-of-humor.djvu
+book           difgeo          poor.2007.differential-geometric-structures.djvu
+book    gnmath                 ramanan.2004.global-calculus.djvu
+book                  alggeo   reid.1988.undergraduate-algebraic-geometry.djvu
+book           linalg alggeo   reid.1995.undergraduate-commutative-algebra.djvu
+book    cplxty whimsy combos   rhodes.2009.algebraic-automata-theory.pdf
+book           diftop          robbin.2018.introduction-differential-topology.pdf
+book           linalg combos   sagan.2001.symmetric-group-representations.djvu
+book    algtop                 sato.1999.algebraic-topology-intuitively.djvu
+book    cplxty                 schoning.1998.gems-computer-science.pdf
+book           spcfnc analys   seaborn.1991.hypergeometric-functions-applications.pdf
+book           litera senses   serafini.1983.codex-seraphinianus.djvu
+book           alggeo          serre.1973.course-in-arithmetic.djvu
+book           linalg combos   serre.1996.representations-finite-groups.djvu
+book           linalg          serre.2001.semisimple-lie-algebras.djvu
+book           alggeo analys   shafarevich.1994.schemes-complex-manifolds.djvu
+book           alggeo          shafarevich.1994.varieties-projective-space.djvu
+book           algthm          shailendra.2020.advanced-data-structures.pdf
+book    gnphys difgeo          shuzt.1980.geometrical-methods-physics.djvu
+book           difgeo          silva.2000.symplectic-geometry.pdf
+book    difgeo qntmch          simms.1976.geometric-quantization.djvu
+book           spcfnc          smith.1970.functions-mathematical-physics.lc.djvu
+book           spcfnc          sneddon.1956.special-functions-physics.pdf
+book                  combos   stanley.2013.algebraic-combinatorics.pdf
+book                  analys   stein.2003.complex-analysis.pdf
+book    algtop                 switzer.1975.homotopy-homology.djvu
+book    homosx                 taormino.2009.anal-sex-positions.pdf
+book    cplxty algthm          tarjan.1987.data-structures-algorithms.djvu
+book           alggeo          tate.1994.rational-elliptic-curves.djvu
+book    gnphys difgeo          thooft.2001.general-relativity.pdf
+book    qntmch                 tong.2007.quantum-field-theory.pdf
+book                  litera   toole.1994.the-neon-bible.pdf
+book    gnphys dynami          treschev.2010.perturbation-hamiltonian-systems.pdf
+book    gnphys sttmch gnphil   truesdell.1966.modern-natural-philosophy.djvu
+book           sttmch gnphil   truesdell.1973.tragicomedy-classical-thermodynamics.djvu
+book           reveal senses   tufte.2001.display-quantitative-information.pdf
+book    gnmath algtop difgeo   ueno.2003.a-mathematical-gift.djvu
+book    algtop                 vick.1994.homology-algebraic-topology.djvu
+book           number          vinogradov.1955.theory-of-numbers.djvu
+book           number          vinogradov.2004.trigonometrical-sums.djvu
+book    cplxty                 vollmer.1999.circuit-complexity.pdf
+book    mchlrn entrop alggeo   watanabe.2009.algebraic-learning-theory.pdf
+book           difgeo          weinstein.1977.symplectic-manifolds.djvu
+book           spcfnc combos   wilf.1990.generating-functions.pdf
+book    racism                 wu.2014.color-of-success.pdf
+paper   sttmch dynami entrop   batterman.1998.boltzmann-from-renormalization.pdf
+paper          difgeo dynami   bracken.2017.ricci-flow-two.pdf
+paper          difgeo          chern.1944.chern-gauss-bonnet.pdf
+paper          difgeo dynami   chow.1991.ricci-flow-two.pdf
+paper   prglng                 gibbons.2010.design-patterns-higher.pdf
+paper          difgeo          hamilton.1988.ricci-flow-surfaces.pdf
+paper          difgeo entrop   har-shemesh.2020.questionnaire-information-geometry.pdf
+paper   algtop                 hu.1955.axiomatic-homotopy.pdf
+paper          difgeo dynami   isenber.2011.ricci-flow-two.pdf
+paper   prglng                 mcbride.2008.applicative-programming-effects.pdf
+paper   prglng                 meijer.1991.bananas-lenses-wire.pdf
+paper   cplxty entrop          nisan.1992.space-bounded-pseudorandomness.pdf
+paper   dynami sttmch gnphil   penrose.1979.foundations-statistical-mechanics.pdf
+paper                 gnphil   putnam.1970.is-semantics-possible.pdf
+paper   gnphys                 ruijgrok.1979.classical-spin-half.pdf
+paper   sttmch difgeo entrop   ruppeiner.1995.riemannian-geometry-thermodynamics.pdf
