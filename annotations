@@ -1,3 +1,51 @@
+book    mchlrn algthm          goodfellow.2016.deep-learning.djvu
+book    gnphys difgeo          bleecker.1981.gauge-variational-principles.djvu
+book    algtop diftop          browder.1972.surgery-simply-connected.djvu
+book    linalg alggeo natmap   halmos.1963.boolean-algebras.djvu
+book    sttmch qntmch          mattuck.1992.diagrams-many-body.djvu
+book                  analys   oxtoby.1980.measure-and-category.djvu
+book           qntmch          sakurai.1967.advanced-quantum-mechanics.djvu
+book    gnmath difgeo          cartan.1970.differential-forms.djvu
+book           senses cogsci   cytowic.2009.wednesday-indigo-synesthesia.pdf
+book    sttmch                 phillips.2002.solid-state-physics.djvu
+book           linalg algthm   bau.1997.numerical-linear-algebra.djvu
+book           senses          briscione.2018.flavor-matrix-pairing.pdf
+book           civics reveal   chomsky.1988.manufacturing-consent.pdf
+book           civics reveal   chomsky.20122.how-world-works.epub
+book    evolve decide gnphil   dawkins.1990.selfish-gene.pdf
+book    qntmch                 dirac.1964.lectures-quantum-mechanics.djvu
+book    gnphys                 feynman.1964.freshman-classical-mechanics.djvu
+book    gnphys                 feynman.1964.freshman-electromagnetism.djvu
+book    qntmch                 feynman.1964.freshman-quantum-mechanics.djvu
+book           gnphil reveal   foucault.1970.order-of-things.pdf
+book           gnphil reveal   gendlin.1997.experiencing-creation-meaning.pdf
+book    qntmch                 georgi.2009.weak-interactions-particles.pdf
+book    number alggeo          gross.2012.elliptic-tales-curves.pdf
+book           homosx litera   isherwood.1978.a-single-man.pdf
+book           gnphil          kant.1783.prolegomena-future-metaphysics.pdf
+book           analys          knopp.1945.complex-functions-cauchy.djvu
+book           analys difgeo   knopp.1947.complex-functions-weiestrass.djvu
+book           analys gnmath   kolmogorov.1950.foundations-theory-probability.pdf
+book           litera racism   levi.1975.periodic-table.pdf
+book           litera          lispector.2012.passion-according-to.epub
+book           mchlrn entrop   lugosi.2013.concentration-inequalities-nonasymptotic.pdf
+book           algtop          may.1999.concise-algebraic-topology.pdf
+book    civics whimsy cogsci   neill.1960.summerhill-radical-rearing.pdf
+book           cogsci evolve   pinker.1995.language-instinct.pdf
+book           gnphil          plato.2022.phaedo-immortal-soul.pdf
+book           gnphil homosx   plato.2022.phaedrus-erotic-love.pdf
+book           civics          ricks.2020.first-principles-constitution.epub
+book           gnphys combos   sands.1994.crystallography.djvu
+book           sttmch          stanley.1971.phase-transitions-critical.djvu
+book           litera whimsy   toole.1980.confederacy-of-dunces.pdf
+book           mchlrn entrop   wainwright.2019.high-dimensional-statistics.pdf
+book    difgeo analys alggeo   wells.1980.analysis-complex-manifolds.pdf
+book           civics          wilkinson.2012.cosmic-constitutional-theory.pdf
+book    litera whimsy racism   yang.2006.american-born-chinese.pdf
+book           litera civics   zamyatin.1921.we.pdf
+
+
+
 book    mchlrn                 abu-mostafa.2012.learning-from-data.pdf
 book    gnmath                 aigner.2009.book-proofs.pdf
 book    racism                 alexander.2010.new-jim-crow.pdf
