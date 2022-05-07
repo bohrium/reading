@@ -1,0 +1,40 @@
+LABELS 
+
+  senses    --- exploring and refining taste, hearing, etc
+  reveal    --- how to write / present / expose
+  homosx
+  civics
+  racism
+
+  whimsy
+  litera    --- literature
+
+  gnphil
+    entrop    --- entropy, information, communication: intersects cs, math, phys 
+    evolve    --- evolutionary biology
+    cogsci
+      decide    --- decision theory, economics
+
+  gncomp
+    mchlrn    --- artificial intelligence, machine learning, pattern recognition
+    algthm    --- algorithms and data structures
+      rndalg  --- randomized algorithms, quantum computing, probabilistic programming 
+    cplxty    --- computational complexity
+    prglng    --- type systems, programming languages
+
+  gnphys
+    sttmch  --- statistical mechanics, thermodynamics
+    qntmch  --- quantum mechanics, quantum field theory
+
+  gnmath
+    alggeo
+      number    --- number theory
+    difgeo
+    diftop
+    algtop
+      natmap    --- categories, functors, natural maps
+    dynami    --- dynamics, including diffeqs
+    combos    --- combinatorics
+    analys    --- mathematical analysis
+      spcfnc    --- special functions
+

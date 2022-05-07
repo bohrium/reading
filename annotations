@@ -1,44 +1,3 @@
-LABELS 
-
-  senses    --- exploring and refining taste, hearing, etc
-  reveal    --- how to write / present / expose
-  homosx
-  civics
-  racism
-
-  whimsy
-  litera    --- literature
-
-  gnphil
-    entrop    --- entropy, information, communication: intersects cs, math, phys 
-    evolve    --- evolutionary biology
-    cogsci
-      decide    --- decision theory, economics
-
-  gncomp
-    mchlrn    --- artificial intelligence, machine learning, pattern recognition
-    algthm    --- algorithms and data structures
-    cplxty    --- computational complexity
-    prglng    --- type systems, programming languages
-
-  gnphys
-    sttmch  --- statistical mechanics, thermodynamics
-    qntmch  --- quantum mechanics, quantum field theory
-
-  gnmath
-    alggeo
-      number    --- number theory
-    difgeo
-    diftop
-    algtop
-      natmap    --- categories, functors, natural maps
-    dynami    --- dynamics, including diffeqs
-    combos    --- combinatorics
-    analys    --- mathematical analysis
-      spcfnc    --- special functions
-
--------------------------------------------------------------------------------
-
 book    mchlrn                 abu-mostafa.2012.learning-from-data.pdf
 book    gnmath                 aigner.2009.book-proofs.pdf
 book    racism                 alexander.2010.new-jim-crow.pdf
@@ -80,7 +39,7 @@ book           cogsci decide   kahneman.1973.attention-and-effort.djvu
 book    prglng                 kaplan.2001.persistent-data-structures.ps
 book    racism                 kendi.2019.be-an-antiracist.pdf
 book    sttmch                 khinchin.1960.foundations-statistical-mechanics.djvu
-book    cplxty                 kitaev.2002.classical-quantum-computation.djvu
+book    cplxty rndalg qntmch   kitaev.2002.classical-quantum-computation.djvu
 book    gnmath reveal          knuth.1987.mathematical-writing.pdf
 book    cplxty                 kozen.2006.theory-computation.pdf
 book    prglng                 krishnamurthi.2017.programming-languages.pdf
