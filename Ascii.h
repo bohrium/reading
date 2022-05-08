@@ -15,20 +15,25 @@
 #include <algorithm>
 #include <iostream>
 
-const int types = 95;
+int const types = 95;
 char asciis[] = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"; 
 int thresholds[95];
 
-void init_thresholds(char const* in_name, int spacing) {
+int const char_width  =  8; 
+int const char_height = 11; 
+float ascii_shapes[types][char_height][char_width]; // mostly 0.0s; sparse 1.0s (so inverted)
+
+void init_thresholds(char const* in_name) {
     Bitmap alpha;
     alpha.read_from(in_name);
     for (int i=0; i!=types; ++i) {
         thresholds[i]=0; 
     } 
     for (int c=0; c!=alpha.dims.width; ++c) {
-        int i = c/spacing;
+        int t = c/char_width;
         for (int r=0; r!=alpha.dims.height; ++r) {
-            thresholds[i] += 255 - alpha.data[r][c].R;
+            thresholds[t] += 255 - alpha.data[r][c].R;
+            ascii_shapes[t][r][c-t*char_width] = (255.0 - alpha.data[r][c].R)/255.0;
         }
     } 
 
@@ -139,6 +144,70 @@ FourDotLocations find_reds(const Bitmap& bmp)
     std::cout << "\n " << reds.locs[3][0] << " : " << reds.locs[3][1] << "\n"; 
 
     return reds;
+}
+
+float match(const Bitmap& bmp, int r, int c, int t)
+{
+    float vw = 0.0; 
+    float ww = 0.0;
+    float vv = 0.0;
+    for (int dr=0; dr<char_height; ++dr) {
+        for (int dc=0; dc<char_width; ++dc) {
+            float v = (255 - bmp.data[r+dr][c+dc].R)/255.0;
+            float w = ascii_shapes[t][dr][dc];
+            vw += v*w;
+            ww += w*w;
+            vv += v*v;
+        }
+    }
+    return (vv*ww ? vw/sqrt(ww*vv) : 0.0); 
+}
+
+typedef struct {
+    int best_key;
+    int dc;
+} MatchType; 
+
+MatchType best_match(const Bitmap& bmp, int r, int c)
+{
+    float best_val = -1.0;
+    int   best_key = -1  ;
+    int   best_dc  = -1  ;
+    for (int t = 0; t!=types; ++t) {
+        for (int dc=0; dc!=8; ++dc) {
+            float m = match(bmp, r, c+dc, t);
+            if ( m <= best_val ) { continue; } 
+            best_val = m; 
+            best_key = t;
+            best_dc  = dc;
+        }
+    }
+    return {best_key, best_dc};
+}
+
+bool is_white_line(const Bitmap& bmp, int r)
+{
+    int darks = 0;
+    for (int c=0; c!=bmp.dims.width; ++c) {
+        if (bmp.data[r][c].R < 192) { darks += 1; }
+    }
+    return darks < bmp.dims.width/25.0;
+}
+
+void ocr(const Bitmap& bmp)
+{
+    for (int r=0; r+char_height<=bmp.dims.height; ++r) {
+        while (r+char_height<=bmp.dims.height && is_white_line(bmp, r)) { ++r; }
+        if (!(r+char_height<=bmp.dims.height)) { break; }
+        std::cout << ":" << r << ":\n";
+        for (int c=0; c+8+char_width<=bmp.dims.width; c+=char_width) {
+            MatchType mt = best_match(bmp, r, c); 
+            std::cout << (char)(' '+mt.best_key); 
+            c += mt.dc;
+        }
+        while (r+char_height<=bmp.dims.height && !is_white_line(bmp, r)) { ++r; }
+        std::cout << std::endl;
+    }
 }
 
 void reframe(const Bitmap& bmp, Bitmap& bmp2)
