@@ -1,38 +1,62 @@
-  senses    --- exploring and refining taste, hearing, etc
-  reveal    --- how to write / present / expose
-  homosx
-  civics
-  racism
+  adapta    --- ADAPTATION and CHOICE
+    cogsci      --- cognitive science
+    decide      --- decision theory, economics
+      gameth        --- game theory
+    dynami      --- mathematical dynamics and control theory
+      diffeq
+    evolve      --- evolutionary biology
+    mchlrn     
+      bayesn        --- bayesian inference
+      deepln        --- deep learning
+      sttlrn        --- statistical learning theory
+      symbol        --- symbolic reasoning
 
-  whimsy
-  litera    --- literature
+  beauty    --- BEAUTY and the SENSES: aids to enrich/explore/refine our senses rather than abstract dissections of the senses
+    homosx
+    litera    --- literature
+    whimsy 
 
-  gnphil
-    entrop    --- entropy, information, communication: intersects cs, math, phys 
-    evolve    --- evolutionary biology
-    cogsci
-      decide    --- decision theory, economics
+  comput    --- COMPUTATION and LOGIC
+    algthm     
+      datast        --- data structures
+      rndalg        --- randomized algorithms, quantum computing, probabilistic programming 
+    cplxty   
+      cmcplx        --- communication complexity
+      russel        --- (un)decidability, (non)computability
+    prglng     
+      typsys        --- type systems
 
-  gncomp
-    mchlrn    --- artificial intelligence, machine learning, pattern recognition
-    algthm    --- algorithms and data structures
-      rndalg  --- randomized algorithms, quantum computing, probabilistic programming 
-    cplxty    --- computational complexity
-    prglng    --- type systems, programming languages
+  domest    --- DOMESTIC life and PRACTICALITIES
+    civics
+      ethics        --- what is our concept of the good?
+      govern        --- constitutional history, law, proposals
+      histor        --- world history
+      racism        --- 
+      reveal        --- how to write / present / expose
+      speech        --- on expression, propaganda, the role of ideas in society 
 
-  gnphys
-    sttmch  --- statistical mechanics, thermodynamics
-    qntmch  --- quantum mechanics, quantum field theory
+  entrop    --- UNCERTAINTY and COMMUNICATION
+    combos      --- enumerative combinatorics, exponential counting rates
+    qntmch      --- quantum mechanics, quantum field theory
+    sttmch      --- statistical mechanics, thermodynamics
 
-  gnmath
+  geomet    --- SPACE and SHAPE 
     alggeo
-      number    --- number theory
-    difgeo
-    diftop
+      linalg        --- linear algebra, the most perfect alg-geo duality
+      number        --- algebraic number theory, arithmetic geometry
     algtop
-      natmap    --- categories, functors, natural maps
-    dynami    --- dynamics, including diffeqs
-    combos    --- combinatorics
-    analys    --- mathematical analysis
-      spcfnc    --- special functions
+      homtop        --- homotopy theory, equivalence, sameness
+      natmap        --- categories, functors, natural maps, adjunctions
+    difgeo
+      cmpanl        --- complex geometry
+      metric        --- smooth metric geometry
+      symple        --- symplectic geometry
+    diftop
+
+  helper    --- helper topics: technical background on which other topics might build  
+    analys      --- mathematical analysis
+      spcfnc        --- special functions
+    gncomp
+    gnmath
+    gnphys
 

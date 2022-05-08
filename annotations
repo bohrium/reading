@@ -1,3 +1,9 @@
+paper   entrop algtop qntmch   baudot.2015.homological-nature-entropy.pdf
+paper   sttmch entrop mchlrn   baudot.2019.poincare-shannon-machine.pdf
+slides  qntmch entrop natmap   mainiero.2020.topology-shared-information.pdf
+paper   entrop algtop mchlrn   vigneaux.2017.information-structures-cohomology.pdf
+
+
 book    mchlrn algthm          goodfellow.2016.deep-learning.djvu
 book    gnphys difgeo          bleecker.1981.gauge-variational-principles.djvu
 book    algtop diftop          browder.1972.surgery-simply-connected.djvu
@@ -6,10 +12,10 @@ book    sttmch qntmch          mattuck.1992.diagrams-many-body.djvu
 book                  analys   oxtoby.1980.measure-and-category.djvu
 book           qntmch          sakurai.1967.advanced-quantum-mechanics.djvu
 book    gnmath difgeo          cartan.1970.differential-forms.djvu
-book           senses cogsci   cytowic.2009.wednesday-indigo-synesthesia.pdf
+book           beauty cogsci   cytowic.2009.wednesday-indigo-synesthesia.pdf
 book    sttmch                 phillips.2002.solid-state-physics.djvu
 book           linalg algthm   bau.1997.numerical-linear-algebra.djvu
-book           senses          briscione.2018.flavor-matrix-pairing.pdf
+book           beauty          briscione.2018.flavor-matrix-pairing.pdf
 book           civics reveal   chomsky.1988.manufacturing-consent.pdf
 book           civics reveal   chomsky.20122.how-world-works.epub
 book    evolve decide gnphil   dawkins.1990.selfish-gene.pdf
@@ -95,7 +101,7 @@ book    cplxty entrop          kushilevitz.1997.communication-complexity.djvu
 book    gnphys                 landau.1976.mechanics.djvu
 book    gnphys                 landau.1981.theory-of-elasticity.djvu
 book    sttmch                 lanford.1973.entropy-equiliibrium-states.pdf
-book                  senses   lester.1999.bach-solo-violin.pdf
+book                  beauty   lester.1999.bach-solo-violin.pdf
 book    gncomp prglng          lipovaca.2011.learn-you-haskell.pdf
 book           civics decide   lutz.2006.principles-constitutional-design.pdf
 book    gnmath                 mahajan.2010.street-fighting-mathematics.pdf
@@ -115,8 +121,8 @@ book                  litera   nabokov.1982.pale-fire.pdf
 book           sttmch          naudts.2011.generalized-thermostatics.pdf
 book           linalg combos   nazarov.2007.representation-symmetric-group.pdf
 book    prglng algthm          okasaki.1998.functional-data-structures.djvu
-book                  senses   omae.1988.book-of-sushi.pdf
-book    gnmath whimsy senses   paulos.1982.logic-of-humor.djvu
+book                  beauty   omae.1988.book-of-sushi.pdf
+book    gnmath whimsy beauty   paulos.1982.logic-of-humor.djvu
 book           difgeo          poor.2007.differential-geometric-structures.djvu
 book    gnmath                 ramanan.2004.global-calculus.djvu
 book                  alggeo   reid.1988.undergraduate-algebraic-geometry.djvu
@@ -127,7 +133,7 @@ book           linalg combos   sagan.2001.symmetric-group-representations.djvu
 book    algtop                 sato.1999.algebraic-topology-intuitively.djvu
 book    cplxty                 schoning.1998.gems-computer-science.pdf
 book           spcfnc analys   seaborn.1991.hypergeometric-functions-applications.pdf
-book           litera senses   serafini.1983.codex-seraphinianus.djvu
+book           litera beauty   serafini.1983.codex-seraphinianus.djvu
 book           alggeo          serre.1973.course-in-arithmetic.djvu
 book           linalg combos   serre.1996.representations-finite-groups.djvu
 book           linalg          serre.2001.semisimple-lie-algebras.djvu
@@ -151,7 +157,7 @@ book                  litera   toole.1994.the-neon-bible.pdf
 book    gnphys dynami          treschev.2010.perturbation-hamiltonian-systems.pdf
 book    gnphys sttmch gnphil   truesdell.1966.modern-natural-philosophy.djvu
 book           sttmch gnphil   truesdell.1973.tragicomedy-classical-thermodynamics.djvu
-book           reveal senses   tufte.2001.display-quantitative-information.pdf
+book           reveal beauty   tufte.2001.display-quantitative-information.pdf
 book    gnmath algtop difgeo   ueno.2003.a-mathematical-gift.djvu
 book    algtop                 vick.1994.homology-algebraic-topology.djvu
 book           number          vinogradov.1955.theory-of-numbers.djvu

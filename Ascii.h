@@ -15,87 +15,138 @@
 #include <algorithm>
 #include <iostream>
 
-int const types = 95;
-char asciis[] = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"; 
-int thresholds[95];
+int const nb_types = 95;
+char asciis[nb_types+1] = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"; 
 
-int const char_width  =  8; 
-int const char_height = 11; 
-float ascii_shapes[types][char_height][char_width]; // mostly 0.0s; sparse 1.0s (so inverted)
+int const max_char_height = 48; 
+int const max_char_width  = 32; 
 
-void init_thresholds(char const* in_name) {
+int const nb_fonts =  7; 
+
+int ascii_heights[nb_fonts]          ;
+int ascii_widths [nb_fonts][nb_types];
+float ascii_shapes[nb_fonts][nb_types][max_char_height][max_char_width]; // mostly 0.0s; sparse 1.0s (so inverted)
+
+bool is_light_row(const Bitmap& bmp, int r)
+{
+    int darks = 0;
+    for (int c=0; c!=bmp.dims.width; ++c) {
+        if (bmp.data[r][c].R < 255-16) { darks += 1; }
+    }
+    return darks < bmp.dims.width/15.0;
+}
+int next_light_row(const Bitmap& bmp, int r_start)
+{
+    int r = r_start;
+    while (r!=bmp.dims.height && !is_light_row(bmp, r)) { ++r; }
+    return r;
+}
+int next_nonlight_row(const Bitmap& bmp, int r_start)
+{
+    int r = r_start;
+    while (r!=bmp.dims.height && is_light_row(bmp, r)) { ++r; }
+    return r;
+}
+
+bool is_white_row(const Bitmap& bmp, int r)
+{
+    int darks = 0;
+    for (int c=0; c!=bmp.dims.width; ++c) {
+        if (bmp.data[r][c].R < 255-16) { darks += 1; }
+    }
+    return darks < bmp.dims.width/15.0; /* ATTENTION! to 15.0 should be 35.0 */
+}
+int next_white_row(const Bitmap& bmp, int r_start)
+{
+    int r = r_start;
+    while (r!=bmp.dims.height && !is_white_row(bmp, r)) { ++r; }
+    return r;
+}
+int next_nonwhite_row(const Bitmap& bmp, int r_start)
+{
+    int r = r_start;
+    while (r!=bmp.dims.height && is_white_row(bmp, r)) { ++r; }
+    return r;
+}
+
+bool is_red_col(const Bitmap& bmp, int r_start, int r_end, int c)
+{
+    for (int r=r_start; r!=r_end; ++r) {
+        if (bmp.data[r][c].R > bmp.data[r][c].G+32) { return true; }
+    }
+    return false;
+}
+int next_red_col(const Bitmap& bmp, int r_start, int r_end, int c_start)
+{
+    int c = c_start;
+    while (c!=bmp.dims.width && !is_red_col(bmp, r_start, r_end, c)) { ++c; }
+    return c;
+}
+int next_nonred_col(const Bitmap& bmp, int r_start, int r_end, int c_start)
+{
+    int c = c_start;
+    while (c!=bmp.dims.width && is_red_col(bmp, r_start, r_end, c)) { ++c; }
+    return c;
+}
+
+bool is_white_col(const Bitmap& bmp, int r_start, int r_end, int c)
+{
+    for (int r=r_start; r!=r_end; ++r) {
+        if (bmp.data[r][c].R <192) { return false; }
+    }
+    return true;
+}
+int next_white_col(const Bitmap& bmp, int r_start, int r_end, int c_start)
+{
+    int c = c_start;
+    while (c!=bmp.dims.width && !is_white_col(bmp, r_start, r_end, c)) { ++c; }
+    return c;
+}
+int next_nonwhite_col(const Bitmap& bmp, int r_start, int r_end, int c_start)
+{
+    int c = c_start;
+    while (c!=bmp.dims.width && is_white_col(bmp, r_start, r_end, c)) { ++c; }
+    return c;
+}
+
+
+
+void load_fonts(char const* in_name) {
     Bitmap alpha;
     alpha.read_from(in_name);
-    for (int i=0; i!=types; ++i) {
-        thresholds[i]=0; 
-    } 
-    for (int c=0; c!=alpha.dims.width; ++c) {
-        int t = c/char_width;
-        for (int r=0; r!=alpha.dims.height; ++r) {
-            thresholds[t] += 255 - alpha.data[r][c].R;
-            ascii_shapes[t][r][c-t*char_width] = (255.0 - alpha.data[r][c].R)/255.0;
+    int r_start, r_end;
+    int c_start, c_end;
+
+    r_end = 0;
+    for (int f=0; f!=nb_fonts; ++f) {
+        r_start = next_nonwhite_row(alpha, r_end  );
+        r_end   = next_white_row   (alpha, r_start);
+
+        //c_end = 0;
+        //for (int t=0; t!=nb_types; ++t) {
+        //    c_end   = next_red_col     (alpha, r_start, r_end, c_end  );
+        //    c_start = next_nonred_col  (alpha, r_start, r_end, c_end  );
+        //    c_start = next_nonwhite_col(alpha, r_start, r_end, c_start);
+        //    c_end   = next_white_col   (alpha, r_start, r_end, c_start);
+        
+        ascii_heights[f] = r_end-r_start;
+        std::cout << " " << ascii_heights[f] << " : ";
+
+        c_end = next_red_col     (alpha, r_start, r_end, 0);
+        for (int t=0; t!=nb_types; ++t) {
+            c_start = next_nonred_col  (alpha, r_start, r_end, c_end  );
+            c_end   = next_red_col     (alpha, r_start, r_end, c_start);
+
+            ascii_widths [f][t] = c_end-c_start;
+            std::cout << ascii_widths [f][t] << ", ";
+            for (int r=0; r!=r_end-r_start; ++r) {
+                for (int c=0; c!=c_end-c_start; ++c) {
+                    ascii_shapes[f][t][r][c] = (255 - alpha.data[r_start+r][c_start+c].G)/255.0; 
+                }
+            }
         }
-    } 
-
-    std::sort(asciis, asciis+types, [](int a, int b) {
-        return thresholds[a-' '] < thresholds[b-' '];
-    });
-
-    int max = 0;
-    for (int i=0; i!=types; ++i) {
-        max = max < thresholds[i] ? thresholds[i] : max; 
-    } 
-    for (int i=0; i!=types; ++i) {
-        thresholds[i] = (255 * thresholds[i])/max; 
-    } 
-
-    for (int i=0; i!=types; ++i) {
-        std::cout << asciis[i] << "\t";
-    } std::cout << std::endl; 
-    for (int i=0; i!=types; ++i) {
-        std::cout << thresholds[asciis[i]-' '] << "\t";
-    } 
-
-}
-
-static int index(double value) {
-    for(int i=0; i<types; ++i) {
-        if(thresholds[asciis[i]-' ']>value) {
-            return i;
-        }
-    }
-    return types-1;
-}
-
-static double value(RGB rgb) {
-    return 255 - (rgb.R + rgb.G + rgb.B)/3;
-}
-
-void translate(const Bitmap& bmp, char const* out_name ) {
-    std::FILE* ascii = std::fopen(out_name, "w");
-
-    double val_err = 0.0;
-    for (int r=bmp.dims.height-1; r>=0; --r) {
-        for (int c=0; c<bmp.dims.width; ++c) {
-            val_err += value(bmp.data[r][c]);
-            int ind = index(val_err);
-            std::fputc(asciis[ind], ascii);
-            val_err -= thresholds[asciis[ind]-' '];
-        }
-        std::fputc('\n', ascii);
-    }
-
-    fclose(ascii);
-}
-
-void stretch(const Bitmap& bmp, Bitmap& bmp2) {
-    bmp2.allocate({bmp.dims.height/2, bmp.dims.width});
-    for (int r=0; r!=bmp.dims.height/2; ++r) {
-        for (int c=0; c!=bmp.dims.width; ++c) {
-            bmp2.data[r][c].R = (bmp.data[2*r][c].R + bmp.data[2*r+1][c].R)/2;
-            bmp2.data[r][c].G = (bmp.data[2*r][c].G + bmp.data[2*r+1][c].G)/2;
-            bmp2.data[r][c].B = (bmp.data[2*r][c].B + bmp.data[2*r+1][c].B)/2;
-        }
+        std::cout << std::endl;
+        std::cout << std::endl;
     }
 }
 
@@ -146,68 +197,100 @@ FourDotLocations find_reds(const Bitmap& bmp)
     return reds;
 }
 
-float match(const Bitmap& bmp, int r, int c, int t)
+float match(const Bitmap& bmp, int r, int c, int f, int t, float scale_r, float scale_c)
 {
     float vw = 0.0; 
     float ww = 0.0;
     float vv = 0.0;
-    for (int dr=0; dr<char_height; ++dr) {
-        for (int dc=0; dc<char_width; ++dc) {
-            float v = (255 - bmp.data[r+dr][c+dc].R)/255.0;
-            float w = ascii_shapes[t][dr][dc];
+    //float score = 0.0; 
+    //float denom = 0.0;
+    for (int dr=0; dr!=ascii_heights[f]; ++dr) {
+        for (int dc=0; dc!=ascii_widths [f][t]; ++dc) {
+            float v =  0.01 + (255 - bmp.data[r+(int)(dr*scale_r)][c+(int)(dc*scale_c)].G)/255.0;
+            float w =  0.01 + ascii_shapes[f][t][dr][dc];
+            //score += ((v>0.6&&w>0.6) ? 1.0 : 0.0);
+            //score += ((v<0.6&&w<0.6) ? 0.8 : 0.0);
+            //denom += ((       w>0.6) ? 1.0 : 0.0);
+            //denom += ((       w<0.6) ? 0.8 : 0.0);
+
             vw += v*w;
             ww += w*w;
             vv += v*v;
         }
     }
+    //return denom ? score/denom : 0.0;
     return (vv*ww ? vw/sqrt(ww*vv) : 0.0); 
+    //return (vv*ww ? vw/sqrt(ww*ascii_heights[f]*ascii_widths[f][t]) : 0.0); 
 }
 
 typedef struct {
     int best_key;
-    int dc;
+    int c_offset;
 } MatchType; 
 
-MatchType best_match(const Bitmap& bmp, int r, int c)
+int const r_jitter = 2;//+2;
+int const c_jitter = 8;//-2;
+MatchType best_match(const Bitmap& bmp, int r, int c, float line_height)
 {
-    float best_val = -1.0;
+    float best_val = -2.0;
     int   best_key = -1  ;
-    int   best_dc  = -1  ;
-    for (int t = 0; t!=types; ++t) {
-        for (int dc=0; dc!=8; ++dc) {
-            float m = match(bmp, r, c+dc, t);
-            if ( m <= best_val ) { continue; } 
-            best_val = m; 
-            best_key = t;
-            best_dc  = dc;
+    int   best_c_offset = 0;
+    for (int f =1 ; f!= 7; ++f) {
+        for (int t = 1; t!=nb_types; ++t) {
+        //for (int t = 'A'-' '; t!='z'-' '; ++t) {
+            if ('['-' '<=t && t<='`'-' ') { continue; }
+            if (':'-' '<=t && t<='@'-' ') { continue; }
+            if ('!'-' '<=t && t<='/'-' ') { continue; }
+            if ('{'-' '<=t && t<='~'-' ') { continue; }
+            for (int dr=-r_jitter; dr<r_jitter+1; dr+=1) {
+                for (int dc=0        ; dc<c_jitter+1; dc+=1) {
+                    float sfs_r[3] = {0.95,1.00,1.05};
+                    //float sfs_c[6] = {0.82,0.91,1.00,1.09,1.18,1.27};
+                    //float sfs_c[6] = {0.70,0.85,1.00,1.15,1.30,1.45};
+                    float sfs_c[5] = {0.85, 0.95,1.00,1.05, 1.15};
+                    for (int sfidx_r=1; sfidx_r!=2; ++sfidx_r) {
+                        for (int sfidx_c=0; sfidx_c!=5; ++sfidx_c) {
+                            float scale = line_height / ascii_heights[f];
+                            float m = match(bmp, r+dr, c+dc, f, t, sfs_r[sfidx_r]*scale, sfs_c[sfidx_c]*scale);
+                            if ( m <= best_val ) { continue; } 
+                            best_val = m; 
+                            best_key = t;
+                            best_c_offset = dc+ascii_widths[f][t]*sfs_c[sfidx_c]*scale;
+                            best_c_offset = best_c_offset<=0 ? 1 : best_c_offset;  
+                        }
+                    }
+                }
+            }
         }
     }
-    return {best_key, best_dc};
-}
-
-bool is_white_line(const Bitmap& bmp, int r)
-{
-    int darks = 0;
-    for (int c=0; c!=bmp.dims.width; ++c) {
-        if (bmp.data[r][c].R < 192) { darks += 1; }
+    if (best_val > 0.9 ) {
+        return {best_key, best_c_offset};
+    } else {
+        return {'.'-' ', best_c_offset};
     }
-    return darks < bmp.dims.width/25.0;
 }
 
 void ocr(const Bitmap& bmp)
 {
-    for (int r=0; r+char_height<=bmp.dims.height; ++r) {
-        while (r+char_height<=bmp.dims.height && is_white_line(bmp, r)) { ++r; }
-        if (!(r+char_height<=bmp.dims.height)) { break; }
-        std::cout << ":" << r << ":\n";
-        for (int c=0; c+8+char_width<=bmp.dims.width; c+=char_width) {
-            MatchType mt = best_match(bmp, r, c); 
-            std::cout << (char)(' '+mt.best_key); 
-            c += mt.dc;
+    int r = 0;
+    while (true) {
+        r = next_nonlight_row(bmp, r);
+        if (!(r+r_jitter+max_char_height<=bmp.dims.height)) { break; } 
+        int line_height = next_white_row(bmp, r) - r;
+        std::cout << ":" << r << ":" << r+line_height << std::endl;
+
+        int c = next_nonwhite_col(bmp, r, r+line_height, 0);
+        while (c+c_jitter+max_char_width<=bmp.dims.width) {
+            //std::cout << " " << c << ", " << std::flush;
+            MatchType mt = best_match(bmp, r, c, line_height); 
+            std::cout << (char)(' '+mt.best_key) << std::flush; 
+            c += mt.c_offset;
         }
-        while (r+char_height<=bmp.dims.height && !is_white_line(bmp, r)) { ++r; }
         std::cout << std::endl;
-    }
+
+        r = next_light_row(bmp, r);
+        if (!(r+r_jitter+max_char_height<=bmp.dims.height)) { break; } 
+    } 
 }
 
 void reframe(const Bitmap& bmp, Bitmap& bmp2)
@@ -301,4 +384,49 @@ void clear_background(const Bitmap& bmp, Bitmap& bmp2, float stdthresh, float da
 }
 
 #endif // ASCII_H
+
+
+
+
+//static int index(double value) {
+//    for(int i=0; i<types; ++i) {
+//        if(thresholds[asciis[i]-' ']>value) {
+//            return i;
+//        }
+//    }
+//    return types-1;
+//}
+//
+//static double value(RGB rgb) {
+//    return 255 - (rgb.R + rgb.G + rgb.B)/3;
+//}
+//
+//void translate(const Bitmap& bmp, char const* out_name ) {
+//    std::FILE* ascii = std::fopen(out_name, "w");
+//
+//    double val_err = 0.0;
+//    for (int r=bmp.dims.height-1; r>=0; --r) {
+//        for (int c=0; c<bmp.dims.width; ++c) {
+//            val_err += value(bmp.data[r][c]);
+//            int ind = index(val_err);
+//            std::fputc(asciis[ind], ascii);
+//            val_err -= thresholds[asciis[ind]-' '];
+//        }
+//        std::fputc('\n', ascii);
+//    }
+//
+//    fclose(ascii);
+//}
+//
+//void stretch(const Bitmap& bmp, Bitmap& bmp2) {
+//    bmp2.allocate({bmp.dims.height/2, bmp.dims.width});
+//    for (int r=0; r!=bmp.dims.height/2; ++r) {
+//        for (int c=0; c!=bmp.dims.width; ++c) {
+//            bmp2.data[r][c].R = (bmp.data[2*r][c].R + bmp.data[2*r+1][c].R)/2;
+//            bmp2.data[r][c].G = (bmp.data[2*r][c].G + bmp.data[2*r+1][c].G)/2;
+//            bmp2.data[r][c].B = (bmp.data[2*r][c].B + bmp.data[2*r+1][c].B)/2;
+//        }
+//    }
+//}
+
 

@@ -12,22 +12,20 @@
 
 int main(int argc, char** argv) {
     if (argc != 2) { std::cout << "Argument Error!"; return 0; }
-    init_thresholds("alpha.bmp");
+    load_fonts("fonts.bmp");
 
     Bitmap BMP, BMP2, BMP3;
     BMP.read_from(argv[1]);
 
-    //ocr(BMP);
+    ocr(BMP);
 
-    reframe         (BMP , BMP2);
+    //reframe         (BMP , BMP2);
+    //BMP2.write_to("stretched.bmp");
 
-    clear_background(BMP2, BMP3, 0.15, 0.25);
-    clear_background(BMP2, BMP3, 0.5 , 1.5 );
+    //clear_background(BMP2, BMP3, 0.5 , 1.5 );
+    //BMP3.write_to("cleared.bmp");
 
-    ocr(BMP3);
-
-    BMP2.write_to("stretched.bmp");
-    BMP3.write_to("cleared.bmp");
+    //ocr(BMP3);
 
     return 0;
 }

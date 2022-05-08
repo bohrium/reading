@@ -49,4 +49,5 @@ if __name__=='__main__':
             print('{:3d} -- {}'.format(i,fnm.split('/')[-1]))
         query = input('open? ')
         if query:
-            os.system('xdg-open {}'.format(matches[int(query)]))
+            #os.system('xdg-open {}'.format(matches[int(query)]))
+            os.system('evince {}'.format(matches[int(query)]))

@@ -1,0 +1,4 @@
+mogrify -format bmp *.jpg
+mogrify -format bmp3 *.bmp
+# note: old (microsoft bitmap fileformat 1) vs (bmp3) has defauilt histograph
+        vs actual rgb bitmap.  We can only read the latter! 
