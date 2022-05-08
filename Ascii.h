@@ -1,8 +1,8 @@
 /* author: samtenka
- * create: 2018-03-29 
+ * create: 2022-05-07 
  * change: 2018-03-29 
  * descrp: interfaces for ASCII Art translation, building on Bitmap 
- * usage : call `translate` and `stretched` 
+ * usage : call `translate` and `clear_background` 
 */
 
 #ifndef ASCII_H
@@ -14,10 +14,6 @@
 #include <fstream>
 #include <algorithm>
 #include <iostream>
-
-//const int types = 9;
-//char asciis[] = " .!itmITM"; // 9 types
-//int thresholds[] = {0, 32, 64, 96, 128, 160, 192, 224, 256};
 
 const int types = 95;
 char asciis[] = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"; 
@@ -99,6 +95,78 @@ void stretch(const Bitmap& bmp, Bitmap& bmp2) {
 }
 
 typedef struct {
+    int locs[4][2];
+} FourDotLocations;
+
+FourDotLocations find_reds(const Bitmap& bmp)
+{
+    /* find four red dots */
+
+    FourDotLocations reds;
+    int nb_reds_found=0;
+    for (int r=0; r!=bmp.dims.height && nb_reds_found!=4; ++r) {
+        for (int c=0; c!=bmp.dims.width && nb_reds_found!=4; ++c) {
+            if (!(bmp.data[r][c].R == 255 &&   
+                  bmp.data[r][c].G ==   0 &&  
+                  bmp.data[r][c].B ==   0   )) { continue; }
+            bool too_close = false;
+            for (int n=0; n!=nb_reds_found; ++n) {
+#define EUCLID2(R,RR,C,CC) (((R)-(RR))*((R)-(RR))+((C)-(CC))*((C)-(CC)))
+                if (EUCLID2(r,reds.locs[n][0],c,reds.locs[n][1]) < 50*50) { too_close=true; }
+            }
+            if (too_close) { continue; }
+            reds.locs[nb_reds_found][0] = r;
+            reds.locs[nb_reds_found][1] = c;
+            nb_reds_found += 1;
+        }
+    }
+    if (nb_reds_found!=4) { std::cout << "\n:(\n" << std::flush; return reds; }
+
+    /* sort */
+#define SWAP(X,Y) { int tmp; tmp=(X); (X)=(Y); (Y)=tmp; }
+#define ALIGN_ROW(i,j) {if (reds.locs[i][0]>reds.locs[j][0]) { SWAP(reds.locs[i][0], reds.locs[j][0]); SWAP(reds.locs[i][1], reds.locs[j][1]); }}
+#define ALIGN_COL(i,j) {if (reds.locs[i][1]>reds.locs[j][1]) { SWAP(reds.locs[i][0], reds.locs[j][0]); SWAP(reds.locs[i][1], reds.locs[j][1]); }}
+
+    ALIGN_ROW(0,1); ALIGN_ROW(1,2); ALIGN_ROW(2,3);
+    ALIGN_ROW(0,1); ALIGN_ROW(1,2);
+    ALIGN_ROW(0,1);
+    ALIGN_COL(0,1);
+    ALIGN_COL(2,3);
+
+    std::cout << "\n " << reds.locs[0][0] << " : " << reds.locs[0][1] << "\n"; 
+    std::cout << "\n " << reds.locs[1][0] << " : " << reds.locs[1][1] << "\n"; 
+    std::cout << "\n " << reds.locs[2][0] << " : " << reds.locs[2][1] << "\n"; 
+    std::cout << "\n " << reds.locs[3][0] << " : " << reds.locs[3][1] << "\n"; 
+
+    return reds;
+}
+
+void reframe(const Bitmap& bmp, Bitmap& bmp2)
+{
+    FourDotLocations reds = find_reds(bmp);
+
+    int height = (reds.locs[2][0]+reds.locs[3][0] - reds.locs[1][0]-reds.locs[0][0])/2; 
+    int width  = (reds.locs[1][1]+reds.locs[3][1] - reds.locs[0][1]-reds.locs[2][1])/2; 
+    bmp2.allocate({height, width});
+
+    for (int r=0; r!=bmp2.dims.height; ++r) {
+        for (int c=0; c!=bmp2.dims.width; ++c) {
+            float y = ((float)r)/bmp2.dims.height; 
+            float x = ((float)c)/bmp2.dims.width; 
+            int rr = (1-y)*((1-x)*(float)reds.locs[0][0]+x*(float)reds.locs[1][0]) + y*((1-x)*(float)reds.locs[2][0]+x*(float)reds.locs[3][0]); 
+            int cc = (1-y)*((1-x)*(float)reds.locs[0][1]+x*(float)reds.locs[1][1]) + y*((1-x)*(float)reds.locs[2][1]+x*(float)reds.locs[3][1]); 
+            if ((0<=rr && rr<bmp.dims.height) && 
+                (0<=cc && cc<bmp.dims.width )   ) {
+                bmp2.data[r][c].R = bmp.data[rr][cc].R;
+                bmp2.data[r][c].G = bmp.data[rr][cc].G;
+                bmp2.data[r][c].B = bmp.data[rr][cc].B;
+            }
+        }
+    }
+
+}
+
+typedef struct {
     float mean, variance;
 } Stats;
 
@@ -125,42 +193,39 @@ Stats stats_from(const Bitmap& bmp, int r, int c, int d, float w) {
     return {sum, sum2-sum*sum};
 } 
 
-void contrast(const Bitmap& bmp, Bitmap& bmp2, float a, float b) {
+float const BACKGROUND_MARGIN = 24.0;
+float const ROUND_MARGIN = 16.0;
+float const BACKGROUND_VARIANCE = 0.01;
+void clear_background(const Bitmap& bmp, Bitmap& bmp2, float stdthresh, float darken_factor) {
     /* clear background from text and darken text 
-     * 
      */
     bmp2.allocate({bmp.dims.height, bmp.dims.width});
     for (int r=0; r!=bmp.dims.height; ++r) {
         for (int c=0; c!=bmp.dims.width; ++c) {
-            //Stats nine  = stats_from(bmp, r, c, 5, 3.0); 
-            Stats seven = stats_from(bmp, r, c, 4, 2.4); 
-            //Stats five  = stats_from(bmp, r, c, 3, 1.8); 
-            //Stats three = stats_from(bmp, r, c, 2, 1.2); 
-            Stats one   = stats_from(bmp, r, c, 1, 0.6); 
+            Stats wide = stats_from(bmp, r, c, 4, 2.4); 
+            Stats narr  = stats_from(bmp, r, c, 1, 0.6); 
 
-            if (seven.variance < 0.01*128*128) {
-                bmp2.data[r][c].R = 255-24 + b*128*a;
-                bmp2.data[r][c].G = 255-24 + b*128*a;
-                bmp2.data[r][c].B = 255-24 + b*128*a;
-            } else if (one.mean < seven.mean + a*sqrt(seven.variance)) {
-                bmp2.data[r][c].R = 255-24 + b*128*(one.mean-seven.mean)/sqrt(seven.variance);
-                bmp2.data[r][c].G = 255-24 + b*128*(one.mean-seven.mean)/sqrt(seven.variance);
-                bmp2.data[r][c].B = 255-24 + b*128*(one.mean-seven.mean)/sqrt(seven.variance);
+            if (wide.variance < BACKGROUND_VARIANCE*128*128) {
+                bmp2.data[r][c].R = 255-BACKGROUND_MARGIN + darken_factor*128*stdthresh;
+                bmp2.data[r][c].G = 255-BACKGROUND_MARGIN + darken_factor*128*stdthresh;
+                bmp2.data[r][c].B = 255-BACKGROUND_MARGIN + darken_factor*128*stdthresh;
             } else {
-                bmp2.data[r][c].R = 255-24 + b*128*a;
-                bmp2.data[r][c].G = 255-24 + b*128*a;
-                bmp2.data[r][c].B = 255-24 + b*128*a;
+                float rel_brightness = (narr.mean - wide.mean) / sqrt(wide.variance);
+#define MIN(X,Y) ((X)<(Y)?(X):(Y))
+                rel_brightness = MIN(+1, rel_brightness); 
+                bmp2.data[r][c].R = 255-BACKGROUND_MARGIN + darken_factor*128*rel_brightness;
+                bmp2.data[r][c].G = 255-BACKGROUND_MARGIN + darken_factor*128*rel_brightness;
+                bmp2.data[r][c].B = 255-BACKGROUND_MARGIN + darken_factor*128*rel_brightness;
             }
 
 #define CLIP(X) ((X)<0?0:(X)>255?255:(X))
             bmp2.data[r][c].R = CLIP(bmp2.data[r][c].R);
             bmp2.data[r][c].G = CLIP(bmp2.data[r][c].G);
             bmp2.data[r][c].B = CLIP(bmp2.data[r][c].B);
-#define ROUND(X) ((X)<24?(X)*(X)/24.0:(X)>255-24?255-24+(255-(X))*(255-(X))/24.0:(X))
+#define ROUND(X) ((X)<ROUND_MARGIN?(X)*(X)/ROUND_MARGIN:(X)>255-ROUND_MARGIN?255-ROUND_MARGIN+(255-(X))*(255-(X))/ROUND_MARGIN:(X))
             bmp2.data[r][c].R = ROUND(bmp2.data[r][c].R);
             bmp2.data[r][c].G = ROUND(bmp2.data[r][c].G);
             bmp2.data[r][c].B = ROUND(bmp2.data[r][c].B);
-
 
         }
     }
