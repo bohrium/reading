@@ -48,6 +48,6 @@ if __name__=='__main__':
         for i,fnm in enumerate(matches):
             print('{:3d} -- {}'.format(i,fnm.split('/')[-1]))
         query = input('open? ')
-        if query:
+        if query and query[0] in '0123456789':
             #os.system('xdg-open {}'.format(matches[int(query)]))
             os.system('evince {}'.format(matches[int(query)]))

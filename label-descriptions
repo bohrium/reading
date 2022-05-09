@@ -1,10 +1,12 @@
   adapta    --- ADAPTATION and CHOICE
     cogsci      --- cognitive science
+      biases        --- biases a la kahneman
     decide      --- decision theory, economics
       gameth        --- game theory
     dynami      --- mathematical dynamics and control theory
       diffeq
     evolve      --- evolutionary biology
+      biolog        --- biology
     mchlrn     
       bayesn        --- bayesian inference
       deepln        --- deep learning
@@ -12,17 +14,22 @@
       symbol        --- symbolic reasoning
 
   beauty    --- BEAUTY and the SENSES: aids to enrich/explore/refine our senses rather than abstract dissections of the senses
+    essays
     homosx
-    litera    --- literature
+    litera      --- literature
+    philos
+    senses
+    symtry      --- symmetry
     whimsy 
 
   comput    --- COMPUTATION and LOGIC
     algthm     
       datast        --- data structures
-      rndalg        --- randomized algorithms, quantum computing, probabilistic programming 
+      rndalg        --- randomized and quantum algorithms, probabilistic programming 
     cplxty   
-      cmcplx        --- communication complexity
+      queryc        --- query complexity, communication complexity
       russel        --- (un)decidability, (non)computability
+    pictur      --- graphical notations for reasoning
     prglng     
       typsys        --- type systems
 
@@ -30,13 +37,15 @@
     civics
       ethics        --- what is our concept of the good?
       govern        --- constitutional history, law, proposals
-      histor        --- world history
-      racism        --- 
-      reveal        --- how to write / present / expose
+      intern        --- international relations, law, trade 
+      histor
+      racism            
       speech        --- on expression, propaganda, the role of ideas in society 
+    reveal      --- how to speak / write / present / expose ; and dually
+      lingua        --- language learning resources
 
   entrop    --- UNCERTAINTY and COMMUNICATION
-    combos      --- enumerative combinatorics, exponential counting rates
+    combos      --- enumerative combinatorics, exponential rates
     qntmch      --- quantum mechanics, quantum field theory
     sttmch      --- statistical mechanics, thermodynamics
 
@@ -56,7 +65,9 @@
   helper    --- helper topics: technical background on which other topics might build  
     analys      --- mathematical analysis
       spcfnc        --- special functions
-    gncomp
+      measur        --- theory of measure and integration
+      fncanl        --- analysis of function spaces
     gnmath
     gnphys
+    gnstat      --- general statistics
 
