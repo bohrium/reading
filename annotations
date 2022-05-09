@@ -1,3 +1,25 @@
+book   gnmath gnphys gnstat             bender.1978.mathematical-modeling.djvu
+book   litera symtry                    gaiman.2002.coraline.pdf
+book   litera whimsy                    goldman.2003.the-princess-bride.pdf
+book   litera                           guterson.1995.snow-falling-cedars.pdf
+book   litera cogsci senses             haddon.2003.curious-incident-dog.pdf
+book   biolog                           hoagland.1999.patterns-about-life.pdf
+book   litera                           huxley.1976.point-counter-point.djvu
+book   cogsci biolog adapta essays      kandel.2006.search-of-memory.pdf
+book   litera racism                    morrison.1997.paradise.pdf
+book   litera                           nabokov.1957.pnin.pdf
+book   litera                           salinger.1951.catcher-in-rye.pdf
+book   essays beauty                    scarry.1999.beauty-being-just.pdf
+book   essays litera beauty whimsy      sedaris.2001.me-talk-pretty.pdf
+book   litera whimsy                    smith.1998.i-capture-castle.pdf
+book   essays comput                    somasundaram.2012.git-for-everyone.pdf
+book   litera whimsy                    steinbeck.1945.cannery-row.pdf
+book   litera whimsy                    sterne.1759.life-tristam-shandy.pdf
+paper  entrop                           ting.1962.amount-of-information.pdf
+book   litera histor                    wells.1895.the-time-machine.pdf
+paper  comput                           wiegley.2009.git-bottom-up.pdf
+book   litera whimsy histor             woolf.1928.orlando-a-biography.pdf
+
 book    diffeq gnphys dynami spaces     abraham.1992.geometry-of-behavior.djvu                        
 book    mchlrn algthm        adapta     abu-mostafa.2012.learning-from-data.pdf                       
 book    algtop homtop                   adams.1964.stable-homotopy-theory.djvu                        
@@ -16,7 +38,7 @@ book    gnphys analys diffeq            john.1975.partial-differential-equations
 book    homosx domest                   anderson.1997.sex-tips-gay.pdf                                
 book    litera homosx                   anderson.2006.winesburg-ohio.pdf                              
 book    combos                          andrews.2004.integer-partitions.djvu                          
-slides  entrop analys algthm            arikan.2015.polar-coding-tutorial.pdf                         
+slide   entrop analys algthm            arikan.2015.polar-coding-tutorial.pdf                         
 book    algtop homtop                   arkowitz.1962.generalize-whitehead-product.pdf                
 book           dynami        measur     arnold.1968.ergodic-theorems-classical.pdf                    
 book           diffeq analys            arnold.1978.ordinary-differential-equations.djvu              
@@ -241,7 +263,7 @@ book           mchlrn entrop            lugosi.2013.concentration-inequalities-n
 book           civics decide speech     lutz.2006.principles-constitutional-design.pdf                
 book    combos alggeo        symtry     macdonald.1995.symmetric-functions-hall.pdf                   
 book    gnmath symtry reveal analys     mahajan.2010.street-fighting-mathematics.pdf                  
-slides  qntmch entrop natmap            mainiero.2020.topology-shared-information.pdf                 
+slide   qntmch entrop natmap            mainiero.2020.topology-shared-information.pdf                 
 book    qntmch                          mandl.1984.quantum-field-theory.pdf                           
 book    diftop                          matsumoto.2001.morse-theory.djvu                              
 book    sttmch qntmch        pictur     mattuck.1992.diagrams-many-body.djvu                          
@@ -428,4 +450,4 @@ book    racism               histor     wu.2014.color-of-success.pdf
 book    litera whimsy racism            yang.2006.american-born-chinese.pdf                           
 book           litera civics speech     zamyatin.1921.we.pdf                                          
 book    alggeo linalg        symtry     zelevinsky.1981.finite-classical-groups.djvu                  
-slides  gnstat mchlrn combos            zettlemoyer.2015.pac-learning-vc.pdf                          
+slide   gnstat mchlrn combos            zettlemoyer.2015.pac-learning-vc.pdf                          
