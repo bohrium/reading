@@ -25,10 +25,12 @@
   comput    --- COMPUTATION and LOGIC
     algthm     
       datast        --- data structures
-      rndalg        --- randomized and quantum algorithms, probabilistic programming 
+      rndalg        --- randomized and quantum algorithms
+      prbprg        --- probabilistic programming 
     cplxty   
       queryc        --- query complexity, communication complexity
       russel        --- (un)decidability, (non)computability
+    logics
     pictur      --- graphical notations for reasoning
     prglng     
       typsys        --- type systems
@@ -48,14 +50,15 @@
     combos      --- enumerative combinatorics, exponential rates
     qntmch      --- quantum mechanics, quantum field theory
     sttmch      --- statistical mechanics, thermodynamics
+    channl      --- compress, error-correcting code, encrypt; featurize
 
   geomet    --- SPACE and SHAPE 
     alggeo
       linalg        --- linear algebra, the most perfect alg-geo duality
       number        --- algebraic number theory, arithmetic geometry
     algtop
-      homtop        --- homotopy theory, equivalence, sameness
-      natmap        --- categories, functors, natural maps, adjunctions
+      homtop        --- SAMENESS: homotopy theory, equivalence
+      natmap        --- COMPOSITIONALITY, UNIVERSALITY: functors, natural maps, adjunctions
     difgeo
       cmpanl        --- complex geometry
       metric        --- smooth metric geometry
